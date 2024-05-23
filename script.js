@@ -1,5 +1,3 @@
-// need to make 8x8 graph
-
 function knightMoves(start, end) {
     // Check if position is on the board
     const isValidPosition = (x, y) => {
@@ -16,7 +14,7 @@ function knightMoves(start, end) {
             [2,1], [1,2], [-1,2], [-2,1], [-2,-1], [-1,-2], [1,-2], [2,-1],
         ]
 
-        // Cycles through all positions
+        // Cycles through all possible positions
         for (let x = 0; x <= 7; x++) {
             for (let y = 0; y <= 7; y++) {
                 const pos = `${x},${y}`;
@@ -26,6 +24,7 @@ function knightMoves(start, end) {
                 for (const [dx, dy] of possibleMovements) {
                     const nx = x + dx;
                     const ny = y + dy;
+                    // Adds new coordinates if they are on the board
                     if (isValidPosition(nx, ny)) {
                         adjacencyList.get(pos).push(`${nx},${ny}`);
                     }
@@ -35,7 +34,7 @@ function knightMoves(start, end) {
         return adjacencyList
     };
 
-    // Implement BFS algorithm to find shortest path
+    // Implement Breadth-First Search algorithm to find shortest path
     const BFS = (start, end) => {
         const adjacencyList = generateAdjacencyList();
         // Hold the visited moves
@@ -76,13 +75,11 @@ function knightMoves(start, end) {
         // No path found
         return null;
     }
+    // Start finding the shortest path
     return BFS(start, end);
 }
 
-
-
 // Example usage
-
-const start = [3, 3];
+const start = [7, 2];
 const end = [0, 0];
 knightMoves(start, end);
